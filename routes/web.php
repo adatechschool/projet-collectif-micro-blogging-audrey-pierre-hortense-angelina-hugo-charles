@@ -4,6 +4,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,24 +15,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use App\Http\Controllers\UserController;
+Route::get('signup', [UserController::class, 'signUp']);
 
-// Route::post('/api/signup', function (Request $request) {
+use App\Http\Controllers\PostController;
+Route::get('createpost', [PostController::class, 'createPost']);
 
-//     $user = \App\Models\User::create([
-//         'nickname' => $request->input('nickname'),
-//         'firstname' => $request->input('firstname'),
-//         'lastname' => $request->input('lastname'),
-//         'email' => $request->input('email'),
-//         'password' => $request->input('password'),
-
-//     ]);
-
-//     // dd($user);
-
-//     return $user;
-
-//     print('coucou');
-// });
 
 
 
