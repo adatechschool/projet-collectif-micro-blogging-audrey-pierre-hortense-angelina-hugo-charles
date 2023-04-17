@@ -16,10 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\UserController;
+
 Route::get('signup', [UserController::class, 'signUp']);
 
 use App\Http\Controllers\PostController;
+
 Route::get('createpost', [PostController::class, 'createPost']);
+Route::get('/', [PostController::class, 'getAllPosts']);
+Route::get('/modifypost', [PostController::class, 'modifyPost']);
+
+
 
 
 

@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function signUp(Request $request)
     {
-        $user = \App\Models\User::create([
+        $user = User::create([
             'nickname' => $request->input('nickname'),
             'firstname' => $request->input('firstname'),
             'lastname' => $request->input('lastname'),
@@ -20,7 +20,7 @@ class UserController extends Controller
 
         dd($user);
 
-        // $user = \App\Models\User::create([
+        // $user = User::create([
         //     'nickname' => 'Snoopy',
         //     'firstname' => 'Snapp',
         //     'lastname' => 'Shot',

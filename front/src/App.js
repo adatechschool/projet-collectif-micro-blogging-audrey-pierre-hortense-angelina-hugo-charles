@@ -1,3 +1,17 @@
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home";
+
+
 export default function App() {
-    return <h1 className="underline">Snappy Shot</h1>;
+
+    return (
+
+       <BrowserRouter>
+        <Routes>
+            <Route path='/' element={<Home />}/>
+        </Routes>
+       </BrowserRouter>
+    )
 }
+    
