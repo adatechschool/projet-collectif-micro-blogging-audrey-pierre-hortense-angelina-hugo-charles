@@ -1,6 +1,7 @@
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
+import Create from "./Pages/Create";
 
 
 export default function App() {
@@ -10,6 +11,7 @@ export default function App() {
        <BrowserRouter>
         <Routes>
             <Route path='/' element={<Home />}/>
+            <Route path='/create' element={<Create />}/> 
         </Routes>
        </BrowserRouter>
     )

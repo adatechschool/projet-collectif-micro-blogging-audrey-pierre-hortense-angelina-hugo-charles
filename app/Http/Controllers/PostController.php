@@ -7,7 +7,12 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    public function createPost(Request $request)
+
+    public function index()
+    {
+        return Post::all();
+    }
+    public function store(Request $request)
     {
         $post = Post::create([
             // 'description' => "♡♡♡♡♡♡♡♡♡",
@@ -22,14 +27,22 @@ class PostController extends Controller
         return $post;
     }
 
-    public function getAllPosts()
+    public function show(Post $post)
     {
-        return Post::all();
+        return $post;
     }
-    public function modifyPost()
+
+
+    public function update(Request $request, Post $post)
     {
+        $post->update($request->all());
         // $post = Post::find(2);
         // $post->picture_path = 'snoopy_2.png';
         // $post->save();
+    }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
     }
 }

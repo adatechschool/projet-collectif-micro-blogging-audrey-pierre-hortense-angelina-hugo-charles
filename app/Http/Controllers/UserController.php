@@ -7,7 +7,11 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function signUp(Request $request)
+    public function index()
+    {
+        return User::all();
+    }
+    public function store(Request $request)
     {
         $user = User::create([
             'nickname' => $request->input('nickname'),
@@ -18,7 +22,7 @@ class UserController extends Controller
 
         ]);
 
-        dd($user);
+        // dd($user);
 
         // $user = User::create([
         //     'nickname' => 'Snoopy',
@@ -30,5 +34,20 @@ class UserController extends Controller
 
 
         return $user;
+    }
+
+    public function show(User $user)
+    {
+        return $user;
+    }
+
+
+    public function update(Request $request, User $user)
+    {
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
     }
 }

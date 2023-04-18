@@ -7,7 +7,7 @@ const [postList, setPostList] = useState([]);
 
    useEffect(() => {
     const fetchPostsFunc = async () => {
-        const fetchPosts = await axios.get('http://localhost:8000/');
+        const fetchPosts = await axios.get('http://localhost:8000/api/posts');
         setPostList(fetchPosts.data);
     }
     fetchPostsFunc();
@@ -29,4 +29,3 @@ return (
             </>
 )
 }
-
