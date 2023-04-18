@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -18,27 +19,20 @@ class UserController extends Controller
             'firstname' => $request->input('firstname'),
             'lastname' => $request->input('lastname'),
             'email' => $request->input('email'),
-            'password' => $request->input('password'),
-
+            'password' => bcrypt($request->input('password')),
         ]);
-
-        // dd($user);
-
-        // $user = User::create([
-        //     'nickname' => 'Snoopy',
-        //     'firstname' => 'Snapp',
-        //     'lastname' => 'Shot',
-        //     'email' => 'snoopy@gmail.com',
-        //     'password' => 'snoopythebest75!',
-        // ]);
-
 
         return $user;
     }
 
-    public function show(User $user)
+    public function show(User $user, Request $request)
     {
-        return $user;
+        if ($request->nickname !== $user->nickname) {
+            return response()->json(['message' => 'infos incorrectes'], 401);
+        } else if (bcrypt($user->password) !== $request->password) {
+            return response()->json(['message' => 'infos incorrectes'], 401);
+        }
+        return response()->json($user);
     }
 
 

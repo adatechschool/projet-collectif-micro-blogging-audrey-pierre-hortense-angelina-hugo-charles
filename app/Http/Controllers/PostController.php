@@ -16,12 +16,11 @@ class PostController extends Controller
     {
         $post = Post::create([
             // 'description' => "♡♡♡♡♡♡♡♡♡",
-            // 'picture_path' => 'snoopy_4.jpeg',
-            // 'user_id' => '1',
-
+            'picture_path' => 'snoopy_4.jpeg',
+            'user_id' => '1',
             'description' => $request->input('description'),
-            'picture_path' => $request->input('picture_path'),
-            'user_id' => $request->input('user_id'),
+            // 'picture_path' => $request->input('picture_path'),
+            // 'user_id' => $request->input('user_id'),
         ]);
 
         return $post;
