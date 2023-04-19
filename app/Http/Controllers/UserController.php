@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Str;
 
@@ -28,9 +29,9 @@ class UserController extends Controller
     public function show(User $user, Request $request)
     {
         if ($request->nickname !== $user->nickname) {
-            return response()->json(['message' => 'infos incorrectes'], 401);
-        } else if (bcrypt($user->password) !== $request->password) {
-            return response()->json(['message' => 'infos incorrectes'], 401);
+            return response()->json(['message' => 'infos incorrectes nickname'], 401);
+        } else if (!Hash::check($request->password, $user->password)) {
+            return response()->json(['message' => 'infos incorrectes password'], 401);
         }
         return response()->json($user);
     }

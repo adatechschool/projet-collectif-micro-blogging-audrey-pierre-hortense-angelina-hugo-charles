@@ -4,7 +4,8 @@ import axios from "axios";
 export default function Form () {
     const [inputText, setInputText] = useState("");
 
-    const sendPost = () => {
+    const sendPost = (e) => {
+        e.preventDefault();
         axios.post('http://localhost:8000/api/posts', {
             description: inputText
         })

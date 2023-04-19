@@ -5,30 +5,46 @@ import { useNavigate } from "react-router-dom";
 export default function ConnexionForm() {
     const [nickname, setnickname] = useState('');
     const [password, setPassword] = useState('');
-    const [userList, setUserList] = useState('');
+    const [userList, setUserList] = useState([]);
     const navigate = useNavigate();
-    
-    useEffect(async ()=>{
-        const users = await axios.get("http://localhost:8000/api/users");
-        setUserList(users);
-    }, [userList]);
 
+    const fetchUsers = async () => {
+        const users = await axios.get("http://localhost:8000/api/users");
+        setUserList(users.data);
+    }
+
+    useEffect(()=> {
+        fetchUsers();
+    }, [])
+    
+    
     const login = (e) => {
+        
         e.preventDefault();
+        console.log(userList);
+
         try {
-            userList.length > 0 ?? userList.map((user)=>{
-                if (user.nickname == nickname) {
-                    console.log('connected', nickname);
-                    localStorage.setItem('connectedUser', nickname);
-                    navigate('/');
+            for (let i = 0; i < userList.length; i++ ) {
+                if (userList[i].nickname === nickname) {
+                    axios.get(`http://localhost:8000/api/users/${userList[i].id}?nickname=${nickname}&password=${password}`).then((res)=>{
+                        if (res.status === 200){
+                            console.log('connected', nickname);
+                            console.log('res.data.id = ', res.data)
+                            localStorage.setItem('connectedUser', res.data.id);
+                            navigate('/');
+                        } else {
+                            console.log('wrong!!!!!')
+                        }
+                    })
+                    return userList[i].nickname;
+                } else {
+                    console.log('no match found');
                 }
-            })
+            }
             
         } catch(err) {
             console.log(err);
         }
-        
-        
     }
 
     return (
